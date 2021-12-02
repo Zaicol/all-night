@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="container">
+		<div class="row" align="left">
+			<div class="col-md-auto" id="av-col">
+				<a href="/avatar/{{ user.id }}"><img src={{pic}}></a>
+			</div>
+			<div class="col">
+				<div class="profileDiv">
+					<div class="profileData">
+						<h3>{{ user.user_name }}</h3>
+						<p>Дата регистрации: {{ regdate }}<br>Тип: {{ user_type }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

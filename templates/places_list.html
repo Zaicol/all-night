@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+	<table class="table table-bordered table-responsive">
+		<thead align="center">
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Имя</th>
+				<th scope="col">Сайт</th>
+				<th scope="col">Широта</th>
+				<th scope="col">Долгота</th>
+				<th scope="col">Дата</th>
+				<th scope="col">Организатор</th>
+				<th scope="col">Удалить</th>
+			</tr>
+		</thead>
+		<tbody>
+		    {% for item in data %}
+			    <tr>
+			    	<td class="text-center"><a href="/place/edit/{{ item[0] }}">№{{ item[0] }}</a></td>
+			    	{% for i in item[1:] %}
+						<td class="text-center">{{ i }}</td>
+					{% endfor %}
+			    	<td class="text-center"><a href="/place/delete/{{ item[0] }}">№{{ item[0] }}</a></td>
+			    </tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

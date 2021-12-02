@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+    <h1>{{ placeformtitle }}</h1>
+    <form id="editform" data-pid="{{ pid }}" action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.title.label }}<br>
+            {{ form.title }}
+            {% for error in form.title.errors %}
+                <span>
+                    {{ error }}
+                </span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.content.label }}<br>
+            {{ form.content }}
+            {% for error in form.content.errors %}
+                <span>
+                    {{ error }}
+                </span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.dt.label }}<br>
+            {{ form.dt }}
+            {% for error in form.dt.errors %}
+                <span>
+                    {{ error }}
+                </span>
+            {% endfor %}
+        </div>
+        <div>
+            {{ form.author.label }}<br>
+            {{ form.author }}
+            {% for error in form.author.errors %}
+                <span>
+                    {{ error }}
+                </span>
+            {% endfor %}
+        </div>
+        <div class="search">
+        {{ form.search.label }}<br>
+        {{ form.search }}
+        {% for error in form.search.errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endfor %}
+        <div id="place-not-found" class="default d-none">Место не найдено</div>
+        </div>
+        <div class="search">
+        {{ form.lat.label }}<span> / </span>{{ form.lon.label }}<br>
+        {{ form.lat }}{{ form.lon }}
+        {% for error in form.lat.errors %}
+            <span>
+                {{ error }}
+            </span>
+        {% endfor %}
+        {% for error in form.lon.errors %}
+            {% if not form.lat.errors %}
+            <span>
+                {{ error }}
+            </span>
+            {% endif %}
+        {% endfor %}
+        </div>
+        <button class="searchbtn" id="search-button">Поиск по адресу</button>
+        <button class="searchbtn" id="search-latlon-button">Поиск по координатам</button>
+        {{ form.submit() }}<br>
+        <div id="map"></div>
+        {% if "Измен" in placeformtitle %}
+            <script src="{{ url_for('static', filename='scripts/placeholder.js') }}" type="module"></script>
+        {% endif %}
+        <script src="{{ url_for('static', filename='scripts/buttons.js') }}"></script>
+        <script src="{{ url_for('static', filename='scripts/g-map-placeform.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0qB_bzyxdUXulSX0-N3K9oRwkxvmW32g&language=ru&region=RU&map_ids=66ceb52f9adbe7f5&callback=initMap&v=weekly">
+        </script>
+    </form>
+{% endblock %}
