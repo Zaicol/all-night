@@ -159,11 +159,16 @@ def make_org(user_id):
     return redirect('/login')
 
 
+def dts(x):
+    return x.date.strftime("%d.%m.%Y %H:%M:%S")
+
+
+
 @app.route('/place/list')
 def places_list():
     if 'username' not in session or session["username"] != 'admin':
         return redirect('/index')
-    data = list(map(lambda x: [x.id, x.title, x.content, x.lat, x.lon, x.date,
+    data = list(map(lambda x: [x.id, x.title, x.content, x.lat, x.lon, dts(x),
                                getusername(x.author)],
                     PlaceModel.query.all()))
     return render_template(
@@ -190,7 +195,7 @@ def addplace():
             content=link,
             lat=form.lat.data,
             lon=form.lon.data,
-            date=datetime.strptime(form.dt.data, "%d.%m.%Y %H:%M:%S"),
+            date=form.dt.data,
             author=form.author.data)
         db.session.add(place)
         db.session.commit()
@@ -213,7 +218,7 @@ def editplace(place_id):
         ed_place.content = form.content.data
         ed_place.lat = form.lat.data
         ed_place.lon = form.lon.data
-        ed_place.date = datetime.strptime(form.dt.data, "%d.%m.%Y %H:%M:%S")
+        ed_place.date = form.dt.data
         ed_place.author = form.author.data
         db.session.commit()
         return redirect('/index')
@@ -311,9 +316,7 @@ def compilejson(place, col):
         s[column.name] = str(getattr(place, column.name))
     s['shortlink'] = str(getattr(place, 'content')).split('/')
     s['shortlink'] = s['shortlink'][0].replace('www.', '')
-    s['dt'] = place.date.timetuple()
-    s['dt'] = [addZero(x) for x in s['dt'][:6]]
-    s['dt'] = '-'.join(reversed(s['dt'][:3])) + ' ' + ':'.join(s['dt'][3:])
+    s['dt'] = dts(place)
     return s
 
 

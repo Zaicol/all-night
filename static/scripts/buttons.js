@@ -13,7 +13,8 @@ function getMap(position, tooltip) {
         try {
             marlist.push(new google.maps.Marker({
                 position: position[i],
-                map: map
+                map: map,
+                animation: google.maps.Animation.DROP
             }));
             makeInfoWindowEvent(map, infoWindow, tooltip[i], marlist[marlist.length - 1])
         } catch (err) {
@@ -98,7 +99,7 @@ async function getAllPlaces() {
         let d = searchdate.getDate();
         postdata = `?date=${y},${m},${d}`
     } else {
-        postdata = '?date=0'
+        postdata = ''
     }
     const response = await fetch("./api/places/all" + postdata);
     return await response.json();
