@@ -7,13 +7,13 @@
 
 
 @font-face {
-    font-family: 'Montserrat'; 
+    font-family: 'Vogue';
     src: url(/static/fonts/font.ttf); 
 }
  
 /* Жирный */
 @font-face {
-    font-family: 'Montserrat bold'; 
+    font-family: 'Vogue bold';
     src: url(/static/fonts/font-bold.ttf); 
 }
 
@@ -27,7 +27,7 @@ body {
     background-color: black;
     min-height: 100vh;
     height: 100%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Vogue', sans-serif;
     font-size: 1.3rem;
 
 }
@@ -73,7 +73,7 @@ main {
     height: auto;
     min-height: 90%;
     padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 0;
     /*background-color: rgb(56 67 133 / 67%);*/
     opacity: 1.0;
     padding-left: 0;
@@ -252,7 +252,7 @@ form div input {
 .pad {
     margin-top: max(-5%,-26px);
     padding: 0 5%;    
-    margin-bottom: 30%;
+    margin-bottom: 20%;
 
 }
 
@@ -297,7 +297,7 @@ form div input {
   }
 }
 
-#popup {
+#popup, .gm-style-iw-d{
     color: black;
     font-size: 2em;
     text-align: center;
